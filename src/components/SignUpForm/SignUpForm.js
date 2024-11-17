@@ -32,7 +32,7 @@ function SignUpForm({ onAuthSuccess }) {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center bg-blue-900 bg-opacity-80 backdrop-blur-md">
       <div className="flex w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="w-1/2 bg-black relative">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-50"></div>

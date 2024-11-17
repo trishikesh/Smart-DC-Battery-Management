@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import SignUpForm from '../components/SignUpForm/SignUpForm';
-import Footer from '../components/footer/Footer';
 import { useNavigate } from 'react-router-dom';
+import ContactUs from '../components/ContactUs/ContactUs';
+import Footer from '../components/footer/Footer';
 
-const SignUp = ({ onAuthSuccess }) => {
+const ContactPage = () => {
   const [activeSection] = useState('contact');
   const navigate = useNavigate();
-  
+
   const handleNavigation = (section) => {
     navigate('/home');
     setTimeout(() => {
@@ -16,6 +16,7 @@ const SignUp = ({ onAuthSuccess }) => {
       }
     }, 100);
   };
+
   return (
     <div className="min-h-screen bg-[#010009]">
       {/* Glassmorphism Navbar */}
@@ -34,28 +35,30 @@ const SignUp = ({ onAuthSuccess }) => {
                 </a>
               ))}
               <a 
-                onClick={() => navigate('/contact-us')}
-                className={`relative px-4 py-2 text-white transition-all duration-300 ease-in-out cursor-pointer `}
-                
+                onClick={() => navigate('/contact')}
+                className={`relative px-4 py-2 text-white transition-all duration-300 ease-in-out cursor-pointer ${
+                  activeSection === 'contact' ? 'text-blue-400 bg-white rounded-l-full rounded-r-full' : 'hover:text-blue-400'
+                }`}
               >
                 Contact
               </a>
-              
+              <a href="/sign-up" className="px-6 py-2 border-2 border-white text-white rounded-full hover:bg-white/10 transition">
+                Sign Up
+              </a>
             </div>
           </div>
         </div>
       </nav>
 
-    <div className="flex flex-col justify-between min-h-screen bg-blue-900 bg-opacity-80 backdrop-blur-md pt-20">
-      <div className="flex-grow flex items-center justify-center">
-        <div className="w-full max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-          <SignUpForm onAuthSuccess={onAuthSuccess} />
-        </div>
+      {/* Add padding top to account for fixed navbar */}
+      <div className="pt-20">
+        <ContactUs />
       </div>
+
+      {/* Footer */}
       <Footer />
-    </div>
     </div>
   );
 };
 
-export default SignUp; 
+export default ContactPage;

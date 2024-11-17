@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Layout from './layout';
 import Home from './pages/Home';
-import PublicPage from './pages/PublicPage';
 import SignUp from './pages/SignUp';
 import UserInfoForm from './components/UserInfoForm/UserInfoForm';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import Dashboard from './pages/Dashboard';
 import { BarChart } from '@mui/x-charts/BarChart';
+import TicketsPage from './pages/Admin/TicketsPage';
+import ContactPage from './pages/ContactUs';
 
 const AuthComponent = ({ onAuthSuccess }) => {
   const navigate = useNavigate();
@@ -41,14 +42,16 @@ function App() {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Routes>
-          <Route path="/" element={<Layout><PublicPage /></Layout>} />
+          <Route path="/home" element={<Layout><Home /></Layout>} />
+          <Route path="/sign-up" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
           <Route path="/login" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
-          <Route path="/home" element={
-            showUserInfoForm ? <UserInfoForm /> : <Layout><Home /></Layout>
+          <Route path="/admin-login" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
+          <Route path="/dashboard" element={
+            showUserInfoForm ? <UserInfoForm /> : <Layout><Dashboard /></Layout>
           } />
           <Route path="/admin-dashboard" element={<Layout><AdminDashboard /></Layout>} />
-          <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
-          <Route path="/public" element={<Layout><PublicPage /></Layout>} />
+          <Route path="/tickets" element={<Layout><TicketsPage /></Layout>} />
+          <Route path="/contact-us" element={<ContactPage />} />
         </Routes>
       </div>
     </Router>
