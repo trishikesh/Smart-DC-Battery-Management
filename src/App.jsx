@@ -9,6 +9,10 @@ import Dashboard from './pages/Dashboard';
 import { BarChart } from '@mui/x-charts/BarChart';
 import TicketsPage from './pages/Admin/TicketsPage';
 import ContactPage from './pages/ContactUs';
+import MyBatteries from './pages/MyBatteries';
+import VoltageStatus from './pages/VoltageStatus';
+import CurrentStatus from './pages/CurrentStatus';
+import Settings from './pages/Settings';
 
 const AuthComponent = ({ onAuthSuccess }) => {
   const navigate = useNavigate();
@@ -52,6 +56,10 @@ function App() {
           <Route path="/admin-dashboard" element={<Layout><AdminDashboard /></Layout>} />
           <Route path="/tickets" element={<Layout><TicketsPage /></Layout>} />
           <Route path="/contact-us" element={<ContactPage />} />
+          <Route path="/my-batteries" element={<Layout><MyBatteries /></Layout>} />
+          <Route path="/voltage-status" element={<Layout><VoltageStatus /></Layout>} />
+          <Route path="/current-status" element={<Layout><CurrentStatus /></Layout>} />
+          <Route path="/settings" element={<Layout><Settings /></Layout>} />
         </Routes>
       </div>
     </Router>
