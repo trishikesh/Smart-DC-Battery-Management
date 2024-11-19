@@ -13,6 +13,8 @@ import MyBatteries from './pages/MyBatteries';
 import VoltageStatus from './pages/VoltageStatus';
 import CurrentStatus from './pages/CurrentStatus';
 import Settings from './pages/Settings';
+import Complaint from './pages/Complaint';
+import Text from './pages/text';
 
 const AuthComponent = ({ onAuthSuccess }) => {
   const navigate = useNavigate();
@@ -60,6 +62,8 @@ function App() {
           <Route path="/voltage-status" element={<Layout><VoltageStatus /></Layout>} />
           <Route path="/current-status" element={<Layout><CurrentStatus /></Layout>} />
           <Route path="/settings" element={<Layout><Settings /></Layout>} />
+          <Route path="/complaint" element={<Layout><Complaint /></Layout>} />
+          <Route path="/text" element={<Layout><Text/></Layout>} />
         </Routes>
       </div>
     </Router>

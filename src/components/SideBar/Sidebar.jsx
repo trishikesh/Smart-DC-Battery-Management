@@ -34,7 +34,9 @@ const Sidebar = ({ className = "" }) => {
           onClick={() => navigate('/current-status')}>
             <BoltIcon className="text-xl text-white" />Current Status
           </li>
-          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white">
+          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white"
+          onClick={() => navigate('/complaint')}
+          >
             <AlertCircle className="text-xl text-white" />Complaint
           </li>
           <br /><br /><br /><br /><br />
