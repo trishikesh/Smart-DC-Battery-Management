@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/footer/Footer";
+import { Helmet } from "react-helmet";
 
 const PublicPage = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -28,6 +29,11 @@ const PublicPage = () => {
 
   return (
     <div className="min-h-screen bg-[#010009]">
+      <Helmet>
+        <title>Smart Battery Management System</title>
+        <meta name="description" content="Revolutionize your energy management with cutting-edge battery monitoring and optimization solutions." />
+        <meta name="keywords" content="Battery Management, Energy Management, Battery Monitoring, Optimization Solutions" />
+      </Helmet>
       {/* Hero Section with Overlaid Navbar */}
       <section id="home" className="relative min-h-screen bg-[#1a1a1a]">
         <div className="absolute inset-0 bg-black/100"></div>

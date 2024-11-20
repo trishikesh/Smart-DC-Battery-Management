@@ -48,7 +48,7 @@ function App() {
     <Router>
       <div className="flex flex-col min-h-screen">
         <Routes>
-          <Route path="/home" element={<Layout><Home /></Layout>} />
+          <Route path="/" element={<Layout><Home /></Layout>} />
           <Route path="/sign-up" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
           <Route path="/login" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
           <Route path="/admin-login" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
