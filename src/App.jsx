@@ -52,16 +52,14 @@ function App() {
           <Route path="/sign-up" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
           <Route path="/login" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
           <Route path="/admin-login" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
-          <Route path="/dashboard" element={
-            showUserInfoForm ? <UserInfoForm /> : <Layout><Dashboard /></Layout>
-          } />
+          <Route path="/dashboard/:userId" element={<Layout><Dashboard /></Layout>} />
           <Route path="/admin-dashboard" element={<Layout><AdminDashboard /></Layout>} />
           <Route path="/tickets" element={<Layout><TicketsPage /></Layout>} />
           <Route path="/contact-us" element={<ContactPage />} />
           <Route path="/my-batteries" element={<Layout><MyBatteries /></Layout>} />
           <Route path="/voltage-status" element={<Layout><VoltageStatus /></Layout>} />
           <Route path="/current-status" element={<Layout><CurrentStatus /></Layout>} />
-          <Route path="/settings" element={<Layout><Settings /></Layout>} />
+          <Route path="/dashboard/:userId/settings" element={<Layout><Settings /></Layout>} />
           <Route path="/complaint" element={<Layout><Complaint /></Layout>} />
           <Route path="/text" element={<Layout><Text/></Layout>} />
         </Routes>

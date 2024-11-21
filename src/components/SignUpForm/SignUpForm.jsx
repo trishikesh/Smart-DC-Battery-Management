@@ -66,12 +66,13 @@ function SignUpForm({ onAuthSuccess }) {
           body: JSON.stringify({ email: formData.email, password: formData.password }),
         });
 
-        const result = await response.text();
+        const result = await response.json();
 
-        if (response.ok && result === "Login allowed") {
-          navigate("/dashboard");
+        if (response.ok && result.message === "Login allowed") {
+          const userid = result.userId;
+          navigate(`/dashboard/${userid}`);
         } else {
-          setLoginError(result || "Login failed");
+          setLoginError(result.message || "Login failed");
         }
       } catch (error) {
         console.error("Error during login:", error.message);
@@ -90,9 +91,12 @@ function SignUpForm({ onAuthSuccess }) {
         body: JSON.stringify({ email: formData.email, otp }),
       });
 
+      const result = await response.json();
+
       if (response.ok) {
         onAuthSuccess(true, false);
-        navigate("/dashboard");
+        const userid = result.userId;
+        navigate(`/dashboard/${userid}`);
       } else {
         console.error("OTP verification failed");
       }

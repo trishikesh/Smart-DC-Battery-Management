@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/SideBar/Sidebar';
-import { Pencil, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
+import { useParams } from 'react-router-dom';
 
 function Settings() {
+  const { userId } = useParams();
   const [isEditing, setIsEditing] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const navigate = useNavigate();
@@ -74,14 +76,19 @@ function Settings() {
                         className="w-full p-3 border rounded-lg bg-[#010009] text-white border-blue-400 focus:ring-2 focus:ring-blue-500 transition-all"
                         disabled={!isEditing}
                       />
-                      <Pencil
-                        className="ml-3 text-blue-400 cursor-pointer hover:text-blue-300 transition-colors"
-                        size={20}
-                        onClick={handleEditClick}
-                      />
                     </div>
                   </div>
                 ))}
+                <div className="flex justify-end">
+                  {!isEditing && (
+                    <button
+                      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all"
+                      onClick={handleEditClick}
+                    >
+                      Update Details
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 
