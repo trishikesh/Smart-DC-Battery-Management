@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/SideBar/Sidebar';
 import { LogOut } from 'lucide-react';
@@ -6,22 +6,98 @@ import { useParams } from 'react-router-dom';
 
 function Settings() {
   const { userId } = useParams();
+  console.log(userId)
   const [isEditing, setIsEditing] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    Name: '',
+    Email: '',
+    Location: '',
+    Phone: ''
+  });
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await fetch('https://backend-battery-management.onrender.com/jhingalala', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userId }),
+        });
+
+        const result = await response.json();
+        if (result.userType === 'existing_user') {
+          setFormData({
+            Name: result.name,
+            Email: result.email,
+            Location: result.location,
+            Phone: result.phoneNumber
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    fetchUserDetails();
+  }, [userId]);
 
   const handleEditClick = () => {
     setIsEditing(true);
   };
-  const handleSaveClick = () => {
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSaveClick = async () => {
+    try {
+      const response = await fetch('https://backend-battery-management.onrender.com/update-user-details', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, userId }),
+      });
+
+      const result = await response.json();
+      if (result.message === 'User details updated and userType changed to existing_user') {
+        alert('Profile updated');
+        navigate(`/dashboard/${userId}`);
+      }
+    } catch (error) {
+      console.error('Error updating user details:', error);
+    }
     setIsEditing(false);
   };
+
   const handleLogout = () => {
     setShowLogoutModal(true);
   };
-  const confirmLogout = () => {
-    navigate('/');
+
+  const confirmLogout = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId }),
+      });
+
+      const result = await response.json();
+      if (result.message === 'User logged out successfully') {
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
   };
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-[#010009] overflow-x-hidden">
       <div className="md:hidden w-full">
@@ -61,12 +137,15 @@ function Settings() {
               </div>
 
               <div className="flex-grow w-full max-w-2xl space-y-6">
-                {['Name', 'Email', 'Password', 'Location', 'Phone'].map((field) => (
+                {['Name', 'Email', 'Location', 'Phone'].map((field) => (
                   <div key={field} className="flex flex-col md:flex-row md:items-center gap-4">
                     <label className="text-white text-lg min-w-[100px]">{field}</label>
                     <div className="flex-grow flex items-center">
                       <input
-                        type={field === 'Password' ? 'password' : 'text'}
+                        type="text"
+                        name={field}
+                        value={formData[field]}
+                        onChange={handleInputChange}
                         placeholder={`Enter your ${field.toLowerCase()}`}
                         className="w-full p-3 border rounded-lg bg-[#010009] text-white border-blue-400 focus:ring-2 focus:ring-blue-500 transition-all"
                         disabled={!isEditing}
@@ -74,6 +153,7 @@ function Settings() {
                     </div>
                   </div>
                 ))}
+                <p className="text-gray-400 text-sm mt-2">Please use the same email ID which you used to register.</p>
                 <div className="flex justify-end">
                   {!isEditing && (
                     <button

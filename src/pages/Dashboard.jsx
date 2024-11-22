@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Sidebar from '../components/SideBar/Sidebar';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -143,12 +143,11 @@ function Home() {
               </div>
               <h2 className="text-xl font-semibold mb-2 text-white">Attention please!</h2>
               <p className="text-gray-300 mb-4">In order to continue with the app, please create your profile.</p>
-              <button
-                onClick={() => window.location.href = '/dashboard/:userId/settings'}
-                className="py-2 px-4 bg-blue-500 text-white rounded-lg font-medium text-lg hover:bg-blue-600 transition duration-200"
-              >
-                Create Your Profile
-              </button>
+              <Link to={`/settings/${userId}`}>
+                <button className="py-2 px-4 bg-blue-500 text-white rounded-lg font-medium text-lg hover:bg-blue-600 transition duration-200">
+                  Create Your Profile
+                </button>
+              </Link>
             </div>
           </div>
         )}

@@ -1,10 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LayoutDashboard, Battery, Zap, BoltIcon, Settings, AlertCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const Sidebar = ({ className = "" }) => {
   const navigate = useNavigate();
-
+  const { userId } = useParams();
   return (
     <div className={`fixed lg:block w-64 h-screen bg-[#1a1a1a] text-white p-4 border-r border-blue-400 ${className}`}>
       <div className="mb-12">
@@ -40,10 +42,11 @@ const Sidebar = ({ className = "" }) => {
             <AlertCircle className="text-xl text-white" />Complaint
           </li>
           <br /><br /><br /><br /><br />
-          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white" 
-          onClick={() => navigate('/settings')}>
+          <Link to={`/settings/${userId}`}>
+          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white" >
             <Settings className="text-xl text-white" />Settings
           </li>
+          </Link>
         </ul>
       </nav>
     </div>
