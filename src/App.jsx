@@ -3,10 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import Layout from './layout';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
-import UserInfoForm from './components/UserInfoForm/UserInfoForm';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import Dashboard from './pages/Dashboard';
-import { BarChart } from '@mui/x-charts/BarChart';
 import TicketsPage from './pages/Admin/TicketsPage';
 import ContactPage from './pages/ContactUs';
 import MyBatteries from './pages/MyBatteries';

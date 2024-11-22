@@ -13,7 +13,7 @@ function Home() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/get-user-info?userId=${userId}`);
+        const response = await fetch(`https://backend-battery-management.onrender.com/get-user-info?userId=${userId}`);
         const data = await response.json();
         setUserInfo(data);
       } catch (error) {

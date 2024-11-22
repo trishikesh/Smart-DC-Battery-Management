@@ -56,7 +56,7 @@ function TicketsPage() {
   };
 
   const confirmLogout = () => {
-    navigate('/home');
+    navigate('/');
   };
 
   const cancelLogout = () => {

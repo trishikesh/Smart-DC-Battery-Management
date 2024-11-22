@@ -8,7 +8,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   
   const handleNavigation = (section) => {
-    navigate('/home');
+    navigate('/');
     setTimeout(() => {
       const element = document.getElementById(section);
       if (element) {

@@ -33,7 +33,7 @@ function SignUpForm({ onAuthSuccess }) {
     e.preventDefault();
     if (isNewUser) {
       try {
-        const response = await fetch("http://localhost:5000/create-user", {
+        const response = await fetch("https://backend-battery-management.onrender.com/create-user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -43,7 +43,7 @@ function SignUpForm({ onAuthSuccess }) {
 
         if (response.ok) {
           setShowOtpInput(true);
-          await fetch("http://localhost:5000/send-otp", {
+          await fetch("https://backend-battery-management.onrender.com/send-otp", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function SignUpForm({ onAuthSuccess }) {
       }
     } else {
       try {
-        const response = await fetch("http://localhost:5000/fetch-user", {
+        const response = await fetch("https://backend-battery-management.onrender.com/fetch-user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -83,7 +83,7 @@ function SignUpForm({ onAuthSuccess }) {
 
   const verifyOtp = async (otp) => {
     try {
-      const response = await fetch("http://localhost:5000/verify-otp", {
+      const response = await fetch("https://backend-battery-management.onrender.com/verify-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

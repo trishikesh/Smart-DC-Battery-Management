@@ -13,20 +13,15 @@ function Settings() {
   const handleEditClick = () => {
     setIsEditing(true);
   };
-
   const handleSaveClick = () => {
     setIsEditing(false);
-    // Add logic to save changes
   };
-
   const handleLogout = () => {
     setShowLogoutModal(true);
   };
-
   const confirmLogout = () => {
-    navigate('/home');
+    navigate('/');
   };
-
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-[#010009] overflow-x-hidden">
       <div className="md:hidden w-full">

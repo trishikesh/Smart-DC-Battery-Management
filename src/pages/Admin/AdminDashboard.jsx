@@ -14,7 +14,7 @@ function AdminDashboard() {
   };
 
   const confirmLogout = () => {
-    navigate('/home');
+    navigate('/');
   };
 
   const cancelLogout = () => {
