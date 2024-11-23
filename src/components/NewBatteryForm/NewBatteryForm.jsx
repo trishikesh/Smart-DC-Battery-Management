@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const NewBattery = ({ onClose }) => {
+  const { userId } = useParams();
   const [formData, setFormData] = useState({
     batteryName: '',
     batteryType: '',
@@ -14,9 +16,8 @@ const NewBattery = ({ onClose }) => {
     const currentDate = new Date();
     const activationDate = currentDate.toLocaleDateString('en-GB'); // Format: dd/mm/yyyy
 
-    // Calculate expected end date (2-3 months ahead)
-    const monthsToAdd = Math.random() > 0.5 ? 2 : 3; // Randomly choose 2 or 3 months
-    const endDate = new Date(currentDate.setMonth(currentDate.getMonth() + monthsToAdd));
+    // Calculate expected end date (2 months ahead)
+    const endDate = new Date(currentDate.setMonth(currentDate.getMonth() + 2));
     const expectedEndDate = endDate.toLocaleDateString('en-GB'); // Format: dd/mm/yyyy
 
     setFormData((prev) => ({
@@ -31,11 +32,38 @@ const NewBattery = ({ onClose }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Battery Entry:', formData);
-    // Add logic to save or process the data
-    onClose();
+    
+    const payload = {
+      userId,
+      batteryName: formData.batteryName,
+      batteryType: formData.batteryType,
+      manufacturer: formData.manufacturer,
+      activationDate: formData.activationDate,
+      expectedEndDate: formData.expectedEndDate
+    };
+
+    try {
+      const response = await fetch('https://backend-battery-management.onrender.com/set-battery', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add battery');
+      }
+
+      const data = await response.json();
+      console.log('Battery added successfully:', data);
+      onClose();
+    } catch (error) {
+      console.error('Error adding battery:', error);
+    }
   };
 
   const handleBackdropClick = (e) => {

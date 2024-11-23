@@ -16,6 +16,12 @@ function Settings() {
     Location: '',
     Phone: ''
   });
+  const [updateFormData, setUpdateFormData] = useState({
+    Name: '',
+    Email: '', 
+    Location: '',
+    Phone: ''
+  });
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -36,6 +42,12 @@ function Settings() {
             Location: result.location,
             Phone: result.phoneNumber
           });
+          setUpdateFormData({
+            Name: result.name,
+            Email: result.email,
+            Location: result.location,
+            Phone: result.phoneNumber
+          });
         }
       } catch (error) {
         console.error('Error fetching user details:', error);
@@ -51,7 +63,7 @@ function Settings() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setUpdateFormData({ ...updateFormData, [name]: value });
   };
 
   const handleSaveClick = async () => {
@@ -61,12 +73,13 @@ function Settings() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, userId }),
+        body: JSON.stringify({ userId, ...updateFormData }),
       });
 
       const result = await response.json();
       if (result.message === 'User details updated and userType changed to existing_user') {
         alert('Profile updated');
+        setFormData(updateFormData);
         navigate(`/dashboard/${userId}`);
       }
     } catch (error) {
@@ -144,7 +157,7 @@ function Settings() {
                       <input
                         type="text"
                         name={field}
-                        value={formData[field]}
+                        value={isEditing ? updateFormData[field] : formData[field]}
                         onChange={handleInputChange}
                         placeholder={`Enter your ${field.toLowerCase()}`}
                         className="w-full p-3 border rounded-lg bg-[#010009] text-white border-blue-400 focus:ring-2 focus:ring-blue-500 transition-all"

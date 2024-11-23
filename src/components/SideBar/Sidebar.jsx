@@ -14,36 +14,34 @@ const Sidebar = ({ className = "" }) => {
       </div>
       <nav>
         <ul className="space-y-4">
-          <li 
-            className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white"
-            onClick={() => navigate('/dashboard')}
-          >
+          <Link to={`/dashboard/${userId}`}>
+          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white">
             <LayoutDashboard className="text-xl text-white" />Dashboard
           </li>
-          <li 
-            className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white"
-            onClick={() => navigate('/my-batteries')}
-          >
+          </Link>
+          <Link to={`/my-batteries/${userId}`}>
+          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white">
             <Battery className="text-xl text-white" />My Batteries  
           </li>
-          <li 
-            className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white"
-            onClick={() => navigate('/voltage-status')}
-          >
+          </Link>
+          <Link to={`/voltage-status/${userId}`}>
+          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white">
             <Zap className="text-xl text-white" />Voltage Status
           </li>
-          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white"
-          onClick={() => navigate('/current-status')}>
+          </Link>
+          <Link to={`/current-status/${userId}`}>
+          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white">
             <BoltIcon className="text-xl text-white" />Current Status
           </li>
-          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white"
-          onClick={() => navigate('/complaint')}
-          >
+          </Link>
+          <Link to={`/complaint/${userId}`}>
+          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white">
             <AlertCircle className="text-xl text-white" />Complaint
           </li>
+          </Link>
           <br /><br /><br /><br /><br />
           <Link to={`/settings/${userId}`}>
-          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white" >
+          <li className="hover:bg-[#010009] p-2 rounded-md cursor-pointer flex items-center gap-2 text-white">
             <Settings className="text-xl text-white" />Settings
           </li>
           </Link>
