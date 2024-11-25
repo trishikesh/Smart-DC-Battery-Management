@@ -1,46 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/SideBar/Sidebar';
+import { useParams } from 'react-router-dom';
 
 function Complaint() {
-  const initialComplaints = [
-    {
-      batteryName: "Battery Pack A123",
-      date: "2024-01-15",
-      level: "Urgent",
-      description: "Voltage fluctuation detected",
-      status: "Pending"
-    },
-    {
-      batteryName: "Battery Pack B456", 
-      date: "2024-01-14",
-      level: "Normal",
-      description: "Regular maintenance check required",
-      status: "Resolved"
-    },
-    {
-      batteryName: "Battery Pack C789",
-      date: "2024-01-13", 
-      level: "Urgent",
-      description: "Charging issues observed",
-      status: "Onhold"
-    },
-    {
-      batteryName: "Battery Pack D012",
-      date: "2024-01-12",
-      level: "Normal", 
-      description: "Temperature sensor malfunction",
-      status: "Pending"
-    },
-    {
-      batteryName: "Battery Pack E345",
-      date: "2024-01-11",
-      level: "Urgent",
-      description: "Battery drainage faster than usual",
-      status: "Resolved"
-    }
-  ];
-
-  const [complaints, setComplaints] = useState(initialComplaints);
+  const { userId } = useParams();
+  const [complaints, setComplaints] = useState([]);
   const [statusFilter, setStatusFilter] = useState('All');
   const [formData, setFormData] = useState({
     batteryName: '',
@@ -48,6 +12,25 @@ function Complaint() {
     level: 'Normal',
     description: ''
   });
+
+  useEffect(() => {
+    fetchComplaints();
+  }, [userId]);
+
+  const fetchComplaints = async () => {
+    try {
+      const response = await fetch('https://backend-battery-management.onrender.com/lodge-complaints', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      setComplaints(data);
+    } catch (error) {
+      console.error('Error fetching complaints:', error);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -58,19 +41,34 @@ function Complaint() {
     setStatusFilter(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newComplaint = {
-      ...formData,
-      status: ['Resolved', 'Onhold', 'Pending'][Math.floor(Math.random() * 3)]
-    };
-    setComplaints([newComplaint, ...complaints]);
-    setFormData({
-      batteryName: '',
-      date: new Date().toISOString().split('T')[0],
-      level: 'Normal',
-      description: ''
-    });
+    try {
+      const response = await fetch('https://backend-battery-management.onrender.com/lodge-complaints', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ...formData,
+          userId,
+    
+        })
+      });
+
+      if (response.ok) {
+        const newComplaint = await response.json();
+        setComplaints([newComplaint, ...complaints]);
+        setFormData({
+          batteryName: '',
+          date: new Date().toISOString().split('T')[0],
+          level: 'Normal',
+          description: ''
+        });
+      }
+    } catch (error) {
+      console.error('Error submitting complaint:', error);
+    }
   };
 
   const filteredComplaints = complaints.filter(complaint => {

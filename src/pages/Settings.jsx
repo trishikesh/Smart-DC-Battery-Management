@@ -69,7 +69,7 @@ function Settings() {
   const handleSaveClick = async () => {
     try {
       const response = await fetch('https://backend-battery-management.onrender.com/update-user-details', {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },

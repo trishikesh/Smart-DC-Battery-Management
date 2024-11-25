@@ -1,12 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/SideBar/Sidebar';
 import NewBattery from '../components/NewBatteryForm/NewBatteryForm';
-import BatteryCardMini from '../components/BatteryCardMini/BatteryCardMini';
+import NewBatteryCard from '../components/NewBatteryCard/NewBatteryCard';
 import BatteryCardDetailed from '../components/BatteryCardDetailed/BatteryCardDetailed';
+import { useParams } from 'react-router-dom';   
 
 function Home() {
   const [showNewBatteryForm, setShowNewBatteryForm] = useState(false);
   const [selectedBattery, setSelectedBattery] = useState(null);
+  const [batteries, setBatteries] = useState([]);
+  const { userId } = useParams();
+
+  useEffect(() => {
+    const fetchBatteries = async () => {
+      try {
+        const response = await fetch('https://backend-battery-management.onrender.com/fetch-battery', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ userId })
+        });
+        const data = await response.json();
+        // Filter out batteries with null values
+        const filteredBatteries = data.filter(battery => {
+          return Object.values(battery).every(value => value !== null);
+        });
+        setBatteries(filteredBatteries);
+      } catch (error) {
+        console.error('Error fetching batteries:', error);
+      }
+    };
+
+    fetchBatteries();
+  }, [userId]);
 
   const handleBatteryClick = (batteryData) => {
     setSelectedBattery(batteryData);
@@ -33,20 +60,11 @@ function Home() {
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12 bg-[#1a1a1a] rounded-lg shadow-md p-4 border-2 border-blue-400 h-[calc(112vh-200px)]">
               <div className="flex flex-col space-y-3 h-full overflow-y-auto px-2 scrollbar-none hover:scrollbar-thin scrollbar-thumb-blue-400/30 hover:scrollbar-thumb-blue-400/50 scrollbar-track-transparent transition-all duration-300">
-                {[...Array(11)].map((_, index) => {
-                  const batteryData = {
-                    batteryName: `Battery Pack ${String.fromCharCode(65 + index)}`,
-                    batteryType: 'Type A',
-                    manufacturer: 'Manufacturer X',
-                    activationDate: '01/01/2023',
-                    expectedEndDate: '01/04/2023',
-                  };
-                  return (
-                    <div key={index} onClick={() => handleBatteryClick(batteryData)} className="cursor-pointer">
-                      <BatteryCardMini batteryData={batteryData} />
-                    </div>
-                  );
-                })}
+                {batteries.map((battery, index) => (
+                  <div key={index} onClick={() => handleBatteryClick(battery)} className="cursor-pointer">
+                    <NewBatteryCard batteryData={battery} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>

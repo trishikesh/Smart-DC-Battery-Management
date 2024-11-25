@@ -58,7 +58,7 @@ function App() {
           <Route path="/voltage-status" element={<Layout><VoltageStatus /></Layout>} />
           <Route path="/current-status" element={<Layout><CurrentStatus /></Layout>} />
           <Route path="/settings/:userId" element={<Layout><Settings /></Layout>} />
-          <Route path="/complaint" element={<Layout><Complaint /></Layout>} />
+          <Route path="/complaint/:userId" element={<Layout><Complaint /></Layout>} />
           <Route path="/text" element={<Layout><Text/></Layout>} />
         </Routes>
       </div>
