@@ -12,7 +12,6 @@ import VoltageStatus from './pages/VoltageStatus';
 import CurrentStatus from './pages/CurrentStatus';
 import Settings from './pages/Settings';
 import Complaint from './pages/Complaint';
-import Text from './pages/text';
 import ErrorPage from './pages/error';
 import AdminLogin from './pages/Admin/login';
 
