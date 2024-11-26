@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <div>
-          <img src="images/logowhite.png" alt="Logo" className="h-8" />
+          <img src="https://imgur.com/iYhYhYR.png" alt="Logo" className="h-8" />
         </div>
 
         {/* Copyright */}
