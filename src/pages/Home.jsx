@@ -51,7 +51,7 @@ const PublicPage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div className="flex flex-col sm:flex-row justify-between items-center">
               <img
-                src="images/logowhite.png"
+                src="https://drive.google.com/uc?export=view&id=1FjSQJnlOR5k9lwUPztoPo_xmjaUY7Oag" 
                 alt="Logo"
                 className="h-10 sm:h-12 mb-4 sm:mb-0"
               />
