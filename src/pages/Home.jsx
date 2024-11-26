@@ -30,10 +30,18 @@ const PublicPage = () => {
   return (
     <div className="min-h-screen bg-[#010009]">
       <Helmet>
-        <title>Smart Battery Management System</title>
-        <meta name="description" content="Revolutionize your energy management with cutting-edge battery monitoring and optimization solutions." />
-        <meta name="keywords" content="Battery Management, Energy Management, Battery Monitoring, Optimization Solutions" />
+        <title>Smart Battery Management System | Home</title>
+        <meta name="description" content="Revolutionize your energy management with our cutting-edge battery monitoring and optimization solutions. Real-time monitoring, performance analytics, and predictive maintenance." />
+        <meta name="keywords" content="battery management system, energy management, battery monitoring, performance analytics, predictive maintenance, smart battery, energy optimization" />
+        <meta property="og:title" content="Smart Battery Management System | Home" />
+        <meta property="og:description" content="Revolutionize your energy management with our cutting-edge battery monitoring and optimization solutions." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Smart Battery Management System | Home" />
+        <meta name="twitter:description" content="Revolutionize your energy management with our cutting-edge battery monitoring and optimization solutions." />
+        <link rel="canonical" href="/" />
       </Helmet>
+
       {/* Hero Section with Overlaid Navbar */}
       <section id="home" className="relative min-h-screen bg-[#1a1a1a]">
         <div className="absolute inset-0 bg-black/100"></div>

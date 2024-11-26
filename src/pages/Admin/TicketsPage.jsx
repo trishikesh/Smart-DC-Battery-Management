@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 function TicketsPage() {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
@@ -114,6 +115,18 @@ function TicketsPage() {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Tickets | Battery Management System</title>
+        <meta name="description" content="View and manage support tickets for battery systems. Track ticket status, update priorities, and monitor system updates." />
+        <meta name="keywords" content="tickets, support tickets, battery management, ticket tracking, system updates" />
+        <meta property="og:title" content="Tickets | Battery Management System" />
+        <meta property="og:description" content="Comprehensive ticket management system for battery-related issues and updates." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Tickets | Battery Management System" />
+        <meta name="twitter:description" content="Comprehensive ticket management system for battery-related issues and updates." />
+      </Helmet>
+
       {/* Simple navbar */}
       <nav className="bg-white shadow-md py-2">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">

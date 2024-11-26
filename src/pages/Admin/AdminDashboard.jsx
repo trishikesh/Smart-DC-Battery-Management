@@ -3,6 +3,7 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 function AdminDashboard() {
   const [date, setDate] = useState(new Date());
@@ -28,6 +29,18 @@ function AdminDashboard() {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>Admin Dashboard | Battery Management System</title>
+        <meta name="description" content="Administrative dashboard for managing battery systems, viewing tickets, and monitoring performance metrics across regions." />
+        <meta name="keywords" content="admin dashboard, battery management, ticket management, battery performance, admin controls" />
+        <meta property="og:title" content="Admin Dashboard | Battery Management System" />
+        <meta property="og:description" content="Comprehensive administrative control panel for battery management system." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Admin Dashboard | Battery Management System" />
+        <meta name="twitter:description" content="Comprehensive administrative control panel for battery management system." />
+      </Helmet>
+
       {/* Simple navbar */}
       <nav className="bg-white shadow-md py-2">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">

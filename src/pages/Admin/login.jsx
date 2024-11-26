@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -34,6 +35,18 @@ function AdminLogin() {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-[#010009]">
+      <Helmet>
+        <title>Admin Login | Battery Management System</title>
+        <meta name="description" content="Secure admin login portal for the Battery Management System. Access administrative controls and monitoring features." />
+        <meta name="keywords" content="admin login, battery management system, admin portal, secure login" />
+        <meta property="og:title" content="Admin Login | Battery Management System" />
+        <meta property="og:description" content="Secure admin login portal for managing battery systems and monitoring performance." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Admin Login | Battery Management System" />
+        <meta name="twitter:description" content="Secure admin login portal for managing battery systems and monitoring performance." />
+      </Helmet>
+
       {/* Left side - Illustration */}
       <div className="hidden lg:flex lg:w-1/2 items-center justify-center p-4 sm:p-6 md:p-8">
         <img

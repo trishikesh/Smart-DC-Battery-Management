@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ContactUs from '../components/ContactUs/ContactUs';
 import Footer from '../components/footer/Footer';
+import { Helmet } from 'react-helmet';
 
 const ContactPage = () => {
   const [activeSection] = useState('contact');
@@ -19,6 +20,12 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-[#010009]">
+      <Helmet>
+        <title>Contact Us | Battery Management System</title>
+        <meta name="description" content="Get in touch with us for any questions or support regarding our battery management system. We're here to help!" />
+        <meta name="keywords" content="contact, support, battery management, customer service, help" />
+      </Helmet>
+
       {/* Glassmorphism Navbar */}
       <nav className="fixed w-full top-0 backdrop-blur-md bg-black/30 shadow-lg z-50 transition-all duration-300 hover:bg-black/50">
         <div className="max-w-7xl mx-auto px-4 py-3">

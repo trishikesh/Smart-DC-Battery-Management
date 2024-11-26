@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SignUpForm from '../components/SignUpForm/SignUpForm';
 import Footer from '../components/footer/Footer';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const SignUp = () => {
   const [activeSection] = useState('contact');
@@ -24,6 +25,18 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-[#010009]">
+      <Helmet>
+        <title>Sign Up | Battery Management System</title>
+        <meta name="description" content="Create your account to access our battery management system. Monitor and optimize your battery performance with real-time analytics." />
+        <meta name="keywords" content="sign up, create account, battery management system, user registration, battery monitoring" />
+        <meta property="og:title" content="Sign Up | Battery Management System" />
+        <meta property="og:description" content="Join our battery management system to monitor and optimize your battery performance." />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Sign Up | Battery Management System" />
+        <meta name="twitter:description" content="Join our battery management system to monitor and optimize your battery performance." />
+      </Helmet>
+
       {/* Glassmorphism Navbar */}
       <nav className="fixed w-full top-0 backdrop-blur-md bg-black/30 shadow-lg z-50 transition-all duration-300 hover:bg-black/50">
         <div className="max-w-7xl mx-auto px-4 py-3">
@@ -62,4 +75,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp; 
+export default SignUp;
