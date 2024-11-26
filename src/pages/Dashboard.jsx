@@ -9,6 +9,7 @@ function Home() {
   const { userId } = useParams();
   const [userInfo, setUserInfo] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [batteries, setBatteries] = useState([]);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -20,8 +21,31 @@ function Home() {
         console.error('Error fetching user info:', error);
       }
     };
+    const fetchBatteries = async () => {
+      try {
+        const response = await fetch('https://backend-battery-management.onrender.com/fetch-battery', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ userId })
+        });
+        const data = await response.json();
+        // Filter out batteries with null values, then sort by date and get last 4
+        const filteredBatteries = data.filter(battery => {
+          return Object.values(battery).every(value => value !== null);
+        });
+        const sortedBatteries = filteredBatteries
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 4);
+        setBatteries(sortedBatteries);
+      } catch (error) {
+        console.error('Error fetching batteries:', error);
+      }
+    };
 
     fetchUserInfo();
+    fetchBatteries();
   }, [userId]);
 
   const handleCreateProfileClick = () => {
@@ -55,49 +79,18 @@ function Home() {
               <div className="col-span-8 bg-[#1a1a1a] rounded-lg shadow-md p-4 border-2 border-blue-400">
                 <h2 className="text-lg font-semibold mb-3 text-white">Recently Viewed</h2>
                 <div className="flex flex-col space-y-2">
-                  <div className="flex items-center bg-[#010009] rounded-lg p-2 border border-blue-400">
-                    <div className="flex-1">
-                      <h3 className="font-medium text-lg text-white">Battery Pack A</h3>
-                      <p className="text-sm text-gray-400">Last checked: 2 hours ago</p>
+                  {batteries.map((battery, index) => (
+                    <div key={index} className="flex items-center bg-[#010009] rounded-lg p-2 border border-blue-400">
+                      <div className="flex-1">
+                        <h3 className="font-medium text-lg text-white">{battery.batteryName}</h3>
+                        <p className="text-sm text-gray-400">Last checked: {new Date(battery.date).toLocaleString()}</p>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-300">Status: {battery.status}</p>
+                        <p className="text-sm text-gray-300">Charge: {battery.charge}%</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-gray-300">Status: Optimal</p>
-                      <p className="text-sm text-gray-300">Charge: 85%</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center bg-[#010009] rounded-lg p-2 border border-blue-400">
-                    <div className="flex-1">
-                      <h3 className="font-medium text-lg text-white">Battery Pack B</h3>
-                      <p className="text-sm text-gray-400">Last checked: 5 hours ago</p>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-gray-300">Status: Good</p>
-                      <p className="text-sm text-gray-300">Charge: 72%</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center bg-[#010009] rounded-lg p-2 border border-blue-400">
-                    <div className="flex-1">
-                      <h3 className="font-medium text-lg text-white">Battery Pack C</h3>
-                      <p className="text-sm text-gray-400">Last checked: 1 day ago</p>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-gray-300">Status: Needs Attention</p>
-                      <p className="text-sm text-gray-300">Charge: 45%</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center bg-[#010009] rounded-lg p-2 border border-blue-400">
-                    <div className="flex-1">
-                      <h3 className="font-medium text-lg text-white">Battery Pack D</h3>
-                      <p className="text-sm text-gray-400">Last checked: 2 days ago</p>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-gray-300">Status: Critical</p>
-                      <p className="text-sm text-gray-300">Charge: 15%</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             

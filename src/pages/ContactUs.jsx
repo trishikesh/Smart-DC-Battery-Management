@@ -37,7 +37,7 @@ const ContactPage = () => {
               <a 
                 onClick={() => navigate('/contact')}
                 className={`relative px-4 py-2 text-white transition-all duration-300 ease-in-out cursor-pointer ${
-                  activeSection === 'contact' ? 'text-blue-400 bg-white rounded-l-full rounded-r-full' : 'hover:text-blue-400'
+                  activeSection === 'contact' ? 'text-blue-400 bg-blue-400 rounded-l-full rounded-r-full' : 'hover:text-blue-400'
                 }`}
               >
                 Contact

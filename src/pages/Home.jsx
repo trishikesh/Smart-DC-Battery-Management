@@ -63,7 +63,7 @@ const PublicPage = () => {
                 ))}
                 <a
                   onClick={() => navigate("/contact-us")}
-                  className="relative px-3 sm:px-4 py-2 text-sm sm:text-base text-white transition-all duration-300 ease-in-out cursor-pointer hover:text-blue-400"
+                  className="relative px-3 sm:px-4 py-2 text-sm sm:text-base text-white transition-all duration-300 ease-in-out cursor-pointer hover:text-blue-400 hover:bg-blue-400/10 active:bg-blue-400"
                 >
                   Contact
                 </a>
@@ -113,28 +113,29 @@ const PublicPage = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 sm:py-20 bg-[#010009] text-white">
+      <section id="about" className="relative py-16 sm:py-20 bg-[#010009] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">
             ABOUT US
           </h2>
-          <div className="flex flex-col md:flex-row gap-8 items-center">
-            <div className="w-full md:w-[40%] h-[200px] bg-[#1a1a1a] rounded-xl  overflow-hidden">
+          <div className="relative flex flex-col items-center">
+            <div className="relative w-[80vw] h-[50vh] group overflow-hidden">
               <img
-                src="images/mission-image.jpg"
+                src="images/about.jpg"
                 alt="About Us"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-xl"
               />
-            </div>
-            <div className="w-full md:w-[60%] backdrop-blur-md bg-white/10 p-8 rounded-xl shadow-lg border border-blue-400">
-              <h3 className="text-2xl font-semibold mb-6">Our Story</h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                We are dedicated to revolutionizing battery management through innovative solutions. 
-                Our mission is to enhance efficiency and sustainability in energy systems, 
-                driving the future of smart battery technology. With cutting-edge monitoring 
-                and optimization capabilities, we're helping businesses achieve better 
-                performance and reliability in their energy management systems.
-              </p>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 group-hover:opacity-100 transition-opacity"></div>
+              <div className="absolute bottom-0 left-0 right-0 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 p-8 backdrop-blur-sm bg-black/30 rounded-b-xl border-t border-blue-400/50">
+                <h3 className="text-2xl font-semibold mb-4">Our Story</h3>
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  We are dedicated to revolutionizing battery management through innovative solutions. 
+                  Our mission is to enhance efficiency and sustainability in energy systems, 
+                  driving the future of smart battery technology. With cutting-edge monitoring 
+                  and optimization capabilities, we're helping businesses achieve better 
+                  performance and reliability in their energy management systems.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -172,7 +173,7 @@ const PublicPage = () => {
             ].map((service, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center text-center"
+                className="flex flex-col items-center text-center transition-transform duration-300 hover:scale-110"
               >
                 <div
                   className={`w-24 h-24 sm:w-32 sm:h-32 rounded-full ${service.color} flex items-center justify-center mb-6`}
@@ -218,18 +219,21 @@ const PublicPage = () => {
                 role: "Energy Manager",
                 quote:
                   "The battery monitoring system has revolutionized our energy management. Exceptional results!",
+                avatar: "/images/female.avif"
               },
               {
                 name: "Michael Torres",
                 role: "Technical Director",
                 quote:
                   "Real-time analytics have helped us optimize our battery performance significantly.",
+                avatar: "/images/male.webp"
               },
               {
                 name: "Emma Wilson",
                 role: "Operations Manager",
                 quote:
                   "The predictive maintenance features have saved us from multiple potential failures.",
+                avatar: "/images/female-2.avif"
               },
             ].map((testimonial, index) => (
               <div
@@ -238,7 +242,7 @@ const PublicPage = () => {
               >
                 <div className="flex flex-col items-center">
                   <img
-                    src={`images/avatar${index + 1}.jpg`}
+                    src={testimonial.avatar}
                     alt="Avatar"
                     className="w-16 h-16 rounded-full mb-4"
                   />

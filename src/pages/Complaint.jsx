@@ -10,7 +10,8 @@ function Complaint() {
     batteryName: '',
     date: new Date().toISOString().split('T')[0],
     level: 'Normal',
-    description: ''
+    description: '',
+    status: 'Pending' // Default status set to Pending
   });
 
   useEffect(() => {
@@ -19,14 +20,21 @@ function Complaint() {
 
   const fetchComplaints = async () => {
     try {
-      const response = await fetch('https://backend-battery-management.onrender.com/lodge-complaints', {
-        method: 'GET',
+      const response = await fetch('https://backend-battery-management.onrender.com/get-lodge-complaint', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({
+          userId
+        })
       });
       const data = await response.json();
-      setComplaints(data);
+      // Data from DB will have updated status values
+      setComplaints(data.map(complaint => ({
+        ...complaint,
+        status: complaint.status || 'Pending' // Fallback to Pending if status is null
+      })));
     } catch (error) {
       console.error('Error fetching complaints:', error);
     }
@@ -44,7 +52,7 @@ function Complaint() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://backend-battery-management.onrender.com/lodge-complaints', {
+      const response = await fetch('https://backend-battery-management.onrender.com/lodge-complaint', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -52,7 +60,7 @@ function Complaint() {
         body: JSON.stringify({
           ...formData,
           userId,
-    
+          status: 'Pending' // Explicitly set status to Pending for new complaints
         })
       });
 
@@ -63,7 +71,8 @@ function Complaint() {
           batteryName: '',
           date: new Date().toISOString().split('T')[0],
           level: 'Normal',
-          description: ''
+          description: '',
+          status: 'Pending' // Reset status to Pending
         });
       }
     } catch (error) {

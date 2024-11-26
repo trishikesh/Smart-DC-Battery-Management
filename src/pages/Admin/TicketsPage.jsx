@@ -1,34 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function TicketsPage() {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [filterStatus, setFilterStatus] = useState('All');
+  const [complaints, setComplaints] = useState([]);
   const navigate = useNavigate();
 
-  const tickets = [
-    {
-      title: 'Battery Performance Issue',
-      reporter: 'John Doe',
-      description: 'Battery draining faster than usual in cold weather',
-      status: 'Pending',
-      time: '2 hours ago'
-    },
-    {
-      title: 'Charging Station Malfunction',
-      reporter: 'Jane Smith', 
-      description: 'Station #4 not responding to charging attempts',
-      status: 'On Hold',
-      time: '5 hours ago'
-    },
-    {
-      title: 'Battery Health Alert',
-      reporter: 'Mike Johnson',
-      description: 'Unexpected decrease in battery health metrics',
-      status: 'Resolved',
-      time: '1 day ago'
+  useEffect(() => {
+    fetchComplaints();
+  }, []);
+
+  const fetchComplaints = async () => {
+    try {
+      const response = await fetch('https://backend-battery-management.onrender.com/all-complaints', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      // Filter out complaints that don't have a complaint number
+      const validComplaints = data.filter(complaint => complaint.complaintNumber);
+      setComplaints(validComplaints);
+    } catch (error) {
+      console.error('Error fetching complaints:', error);
     }
-  ];
+  };
 
   const systemUpdates = [
     {
@@ -63,11 +61,32 @@ function TicketsPage() {
     setShowLogoutPopup(false);
   };
 
+  const handleStatusChange = async (complaintNumber, newStatus) => {
+    try {
+      const response = await fetch('https://backend-battery-management.onrender.com/update-status', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          complaintNumber: complaintNumber,
+          newStatus: newStatus // Changed from status to newStatus
+        })
+      });
+      if (response.ok) {
+        // Refresh complaints after successful update
+        fetchComplaints();
+      }
+    } catch (error) {
+      console.error('Error updating status:', error);
+    }
+  };
+
   const getStatusColor = (status) => {
     switch(status) {
       case 'Pending':
         return 'bg-yellow-100 text-yellow-800';
-      case 'On Hold':
+      case 'Onhold':
         return 'bg-orange-100 text-orange-800';
       case 'Resolved':
         return 'bg-green-100 text-green-800';
@@ -89,9 +108,9 @@ function TicketsPage() {
     }
   };
 
-  const filteredTickets = filterStatus === 'All' 
-    ? tickets 
-    : tickets.filter(ticket => ticket.status === filterStatus);
+  const filteredComplaints = filterStatus === 'All' 
+    ? complaints 
+    : complaints.filter(complaint => complaint.status === filterStatus);
 
   return (
     <div className="min-h-screen">
@@ -127,7 +146,7 @@ function TicketsPage() {
               <div className="flex justify-between items-center mb-4">
                 <h2 className="font-semibold">Recent Tickets</h2>
                 <div className="flex space-x-4">
-                  {['All', 'Pending', 'On Hold', 'Resolved'].map((status) => (
+                  {['All', 'Pending', 'Onhold', 'Resolved'].map((status) => (
                     <label key={status} className="inline-flex items-center">
                       <input
                         type="radio"
@@ -143,19 +162,28 @@ function TicketsPage() {
                 </div>
               </div>
               <div className="space-y-3">
-                {filteredTickets.map((ticket, index) => (
+                {filteredComplaints.map((complaint, index) => (
                   <div key={index} className="bg-white p-4 rounded-lg shadow">
                     <div className="flex justify-between items-center">
                       <div>
-                        <h3 className="font-medium">{ticket.title}</h3>
-                        <p className="text-sm text-gray-600">Reported by: {ticket.reporter}</p>
-                        <p className="text-sm text-gray-500 mt-1">{ticket.description}</p>
+                        <div className="flex items-center gap-3">
+                          <h3 className="font-medium">{complaint.batteryName}</h3>
+                          <span className="text-sm text-gray-500">Ticket #{complaint.complaintNumber}</span>
+                        </div>
+                        <p className="text-sm text-gray-600">Level: {complaint.level}</p>
+                        <p className="text-sm text-gray-500 mt-1">{complaint.description}</p>
                       </div>
                       <div className="flex flex-col items-end">
-                        <span className={`px-3 py-1 rounded-full ${getStatusColor(ticket.status)} text-sm`}>
-                          {ticket.status}
-                        </span>
-                        <span className="text-sm text-gray-500 mt-2">{ticket.time}</span>
+                        <select 
+                          className={`px-3 py-1 rounded-lg text-sm border ${getStatusColor(complaint.status)}`}
+                          value={complaint.status}
+                          onChange={(e) => handleStatusChange(complaint.complaintNumber, e.target.value)}
+                        >
+                          <option value="Pending">Pending</option>
+                          <option value="Onhold">On Hold</option>
+                          <option value="Resolved">Resolved</option>
+                        </select>
+                        <span className="text-sm text-gray-500 mt-2">{complaint.date}</span>
                       </div>
                     </div>
                   </div>

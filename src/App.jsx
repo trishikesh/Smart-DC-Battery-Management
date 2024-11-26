@@ -13,6 +13,8 @@ import CurrentStatus from './pages/CurrentStatus';
 import Settings from './pages/Settings';
 import Complaint from './pages/Complaint';
 import Text from './pages/text';
+import ErrorPage from './pages/error';
+import AdminLogin from './pages/Admin/login';
 
 const AuthComponent = ({ onAuthSuccess }) => {
   const navigate = useNavigate();
@@ -49,17 +51,19 @@ function App() {
           <Route path="/" element={<Layout><Home /></Layout>} />
           <Route path="/sign-up" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
           <Route path="/login" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
-          <Route path="/admin-login" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
+          <Route path="/admin-login" element={<AdminLogin/>} />
           <Route path="/dashboard/:userId" element={<Layout><Dashboard /></Layout>} />
           <Route path="/admin-dashboard" element={<Layout><AdminDashboard /></Layout>} />
           <Route path="/tickets" element={<Layout><TicketsPage /></Layout>} />
           <Route path="/contact-us" element={<ContactPage />} />
           <Route path="/my-batteries/:userId" element={<Layout><MyBatteries /></Layout>} />
-          <Route path="/voltage-status" element={<Layout><VoltageStatus /></Layout>} />
-          <Route path="/current-status" element={<Layout><CurrentStatus /></Layout>} />
+          <Route path="/voltage-status/:userId" element={<Layout><VoltageStatus /></Layout>} />
+          <Route path="/current-status/:userId" element={<Layout><CurrentStatus /></Layout>} />
           <Route path="/settings/:userId" element={<Layout><Settings /></Layout>} />
           <Route path="/complaint/:userId" element={<Layout><Complaint /></Layout>} />
           <Route path="/text" element={<Layout><Text/></Layout>} />
+          <Route path="*" element={<ErrorPage />} />
+
         </Routes>
       </div>
     </Router>
