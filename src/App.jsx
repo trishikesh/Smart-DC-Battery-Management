@@ -54,7 +54,7 @@ function App() {
           <Route path="/admin-login" element={<AdminLogin/>} />
           <Route path="/dashboard/:userId" element={<Layout><Dashboard /></Layout>} />
           <Route path="/admin-dashboard" element={<Layout><AdminDashboard /></Layout>} />
-          <Route path="/tickets" element={<Layout><TicketsPage /></Layout>} />
+          <Route path="/admin/tickets" element={<Layout><TicketsPage /></Layout>} />
           <Route path="/contact-us" element={<ContactPage />} />
           <Route path="/my-batteries/:userId" element={<Layout><MyBatteries /></Layout>} />
           <Route path="/voltage-status/:userId" element={<Layout><VoltageStatus /></Layout>} />
