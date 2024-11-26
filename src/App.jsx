@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Layout from './layout';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
@@ -46,6 +47,12 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
+        <Helmet>
+          <title>Battery Management System</title>
+          <meta name="description" content="A comprehensive battery management system" />
+          <link rel="icon" href="https://imgur.com/iYhYhYR.png" />
+          <meta name="theme-color" content="#000000" />
+        </Helmet>
         <Routes>
           <Route path="/" element={<Layout><Home /></Layout>} />
           <Route path="/sign-up" element={<AuthComponent onAuthSuccess={handleAuthSuccess} />} />
@@ -61,7 +68,6 @@ function App() {
           <Route path="/settings/:userId" element={<Layout><Settings /></Layout>} />
           <Route path="/complaint/:userId" element={<Layout><Complaint /></Layout>} />
           <Route path="*" element={<ErrorPage />} />
-
         </Routes>
       </div>
     </Router>
