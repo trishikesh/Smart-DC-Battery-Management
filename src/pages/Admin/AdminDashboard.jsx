@@ -44,7 +44,7 @@ function AdminDashboard() {
       {/* Simple navbar */}
       <nav className="bg-white shadow-md py-2">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <img src="images/logo.png" alt="Logo" className="h-10" />
+          <img src="https://imgur.com/mna3iM9.png" alt="Logo" className="h-10" />
           <div className="flex gap-12 mr-8">
             <button 
               className="text-gray-600 hover:text-blue-600 text-lg"

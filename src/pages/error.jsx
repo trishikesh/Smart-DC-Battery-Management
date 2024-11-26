@@ -14,7 +14,7 @@ const ErrorPage = () => {
 
       <div className="min-h-screen bg-[#010009] flex flex-col items-center justify-center p-4">
         <img 
-          src="/images/404image.jpg" 
+          src="https://imgur.com/KBwixYe.jpg" 
           alt="404 Error" 
           className="max-w-md w-full h-auto mb-8"
         />

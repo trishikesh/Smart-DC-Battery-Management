@@ -51,7 +51,7 @@ const PublicPage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div className="flex flex-col sm:flex-row justify-between items-center">
               <img
-                src="https://drive.google.com/uc?export=view&id=1FjSQJnlOR5k9lwUPztoPo_xmjaUY7Oag" 
+                src="https://imgur.com/iYhYhYR.png"
                 alt="Logo"
                 className="h-10 sm:h-12 mb-4 sm:mb-0"
               />
@@ -110,7 +110,7 @@ const PublicPage = () => {
               </div>
               <div className="relative flex items-center justify-center mt-8 lg:mt-0">
                 <img
-                  src="images/nobgbattery1.gif"
+                  src="https://imgur.com/Ee0SKfH.gif"
                   alt="Battery Animation"
                   className="w-full max-w-lg lg:max-w-2xl object-contain z-10"
                 />
@@ -129,7 +129,7 @@ const PublicPage = () => {
           <div className="relative flex flex-col items-center">
             <div className="relative w-[80vw] h-[50vh] group overflow-hidden">
               <img
-                src="images/about.jpg"
+                src="https://imgur.com/hSpv4ji.jpg"
                 alt="About Us"
                 className="w-full h-full object-cover rounded-xl"
               />
@@ -227,21 +227,21 @@ const PublicPage = () => {
                 role: "Energy Manager",
                 quote:
                   "The battery monitoring system has revolutionized our energy management. Exceptional results!",
-                avatar: "/images/female.avif"
+                avatar: "https://imgur.com/qB8AiaK.png"
               },
               {
                 name: "Michael Torres",
                 role: "Technical Director",
                 quote:
                   "Real-time analytics have helped us optimize our battery performance significantly.",
-                avatar: "/images/male.webp"
+                avatar: "https://imgur.com/GchsAMM.png"
               },
               {
                 name: "Emma Wilson",
                 role: "Operations Manager",
                 quote:
                   "The predictive maintenance features have saved us from multiple potential failures.",
-                avatar: "/images/female-2.avif"
+                avatar: "https://imgur.com/If7dR8j.png"
               },
             ].map((testimonial, index) => (
               <div

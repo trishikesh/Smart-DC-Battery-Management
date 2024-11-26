@@ -10,7 +10,7 @@ const Sidebar = ({ className = "" }) => {
   return (
     <div className={`fixed lg:block w-64 h-screen bg-[#1a1a1a] text-white p-4 border-r border-blue-400 ${className}`}>
       <div className="mb-24">
-        <img src="/images/logowhite.png" alt="Logo" className="h-18" />
+        <img src="https://imgur.com/iYhYhYR.png" alt="Logo" className="h-18" />
       </div>
       <nav>
         <ul className="space-y-4 mb-20">

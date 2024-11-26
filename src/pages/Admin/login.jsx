@@ -50,7 +50,7 @@ function AdminLogin() {
       {/* Left side - Illustration */}
       <div className="hidden lg:flex lg:w-1/2 items-center justify-center p-4 sm:p-6 md:p-8">
         <img
-          src="/images/adminlogin.png"
+          src="https://imgur.com/sHpP80p.png"
           alt="Login Illustration"
           className="max-w-full h-auto object-contain"
         />

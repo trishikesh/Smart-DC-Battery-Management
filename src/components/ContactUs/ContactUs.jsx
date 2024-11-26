@@ -7,7 +7,7 @@ const ContactUs = () => {
         <div className="flex flex-col md:flex-row items-center bg-[#110026] p-8 rounded-lg shadow-lg">
           <div className="w-full md:w-1/2 mb-8 md:mb-0">
             <img 
-              src="images/contactpage.png" 
+              src="https://imgur.com/dUU1TYe.png" 
               alt="Contact Us"
               className="w-full h-auto rounded-lg"
             />

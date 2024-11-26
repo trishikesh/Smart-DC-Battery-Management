@@ -30,7 +30,7 @@ const ContactPage = () => {
       <nav className="fixed w-full top-0 backdrop-blur-md bg-black/30 shadow-lg z-50 transition-all duration-300 hover:bg-black/50">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
-            <img src="images/logowhite.png" alt="Logo" className="h-12" onClick={() => handleNavigation('home')} style={{cursor: 'pointer'}} />
+            <img src="https://imgur.com/iYhYhYR.png" alt="Logo" className="h-12" onClick={() => handleNavigation('home')} style={{cursor: 'pointer'}} />
             <div className="flex items-center gap-8">
               {['home', 'about', 'services'].map((section) => (
                 <a 
