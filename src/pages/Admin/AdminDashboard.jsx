@@ -76,7 +76,7 @@ function AdminDashboard() {
               <div className="flex justify-between items-center mb-4">
                 <h2 className="font-semibold">Recent Tickets</h2>
                 <button 
-                  onClick={() => navigate('/tickets')}
+                  onClick={() => navigate('/admin/tickets')}
                   className="text-blue-600 hover:underline text-sm"
                 >
                   View All
